@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HireForge — Architecture & Flowchart Viewer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      max-width: 900px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .diagram-container {
+      width: 100%;
+      max-width: 1300px;
+      background: #111827;
+      border: 1px solid #1f293d;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .diagram-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #0284c7;
+      color: #ffffff;
+    }
+    .badge-purple { background: #9333ea; }
+    .badge-emerald { background: #059669; }
+    .badge-amber { background: #d97706; }
+    .diagram-desc {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .img-box {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #080c14;
+      border: 1px solid #334155;
+    }
+    .img-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>HireForge Visual Architecture & Flowcharts</h1>
+    <p>Interactive full-resolution viewer for HireForge's multi-service architecture, LangGraph state machine, and distributed fault-tolerance lifecycle.</p>
+  </header>
+
+  <!-- Diagram 1 -->
+  <div class="diagram-container">
+    <div class="diagram-title">
+      1. High-Level Concept & Pipeline Overview
+      <span class="badge">Concept</span>
+    </div>
+    <div class="diagram-desc">Visual flow from browser upload to Express, AWS S3/SQS, LangGraph Python Agent, LaTeX engine, and WebSocket dashboard.</div>
+    <div class="img-box">
+      <img src="hireforge_pipeline_overview.jpg" alt="HireForge Pipeline Overview">
+    </div>
+  </div>
+
+  <!-- Diagram 2 -->
+  <div class="diagram-container">
+    <div class="diagram-title">
+      2. Complete End-to-End System Architecture
+      <span class="badge badge-emerald">Architecture</span>
+    </div>
+    <div class="diagram-desc">Technical breakdown of all 8 phases: Validation (Magic bytes), Asynchronous SQS dispatch, MongoDB CAS, PyMuPDF, LaTeX compile, and S3 pre-signed downloads.</div>
+    <div class="img-box">
+      <img src="system_architecture_flowchart.png" alt="System Architecture Flowchart">
+    </div>
+  </div>
+
+  <!-- Diagram 3 -->
+  <div class="diagram-container">
+    <div class="diagram-title">
+      3. LangGraph Agent State Machine
+      <span class="badge badge-purple">AI Agent</span>
+    </div>
+    <div class="diagram-desc">Cyclic execution graph, AgentState schema, deterministic ATS scoring formula, conditional branching (<40 vs rewrite), capped loops (max 3), and "Score What You Ship".</div>
+    <div class="img-box">
+      <img src="langgraph_agent_flowchart.png" alt="LangGraph Agent Flowchart">
+    </div>
+  </div>
+
+  <!-- Diagram 4 -->
+  <div class="diagram-container">
+    <div class="diagram-title">
+      4. Fault Tolerance & Crash Recovery Lifecycle
+      <span class="badge badge-amber">Fault Tolerance</span>
+    </div>
+    <div class="diagram-desc">SQS visibility timeout, daemon heartbeat thread, stale job reaper (600s), atomic MongoDB CAS, and Dead-Letter Queue (DLQ).</div>
+    <div class="img-box">
+      <img src="crash_recovery_flowchart.png" alt="Crash Recovery Flowchart">
+    </div>
+  </div>
+
+</body>
+</html>
