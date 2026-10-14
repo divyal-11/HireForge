@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="100%" height="100%" style="background:#0b0f19; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <filter id="shadow2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <marker id="mCyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#06b6d4" />
+    </marker>
+    <marker id="mRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ef4444" />
+    </marker>
+    <marker id="mGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#10b981" />
+    </marker>
+    <marker id="mAmber" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f59e0b" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#bgGrad2)" />
+
+  <!-- Header -->
+  <text x="600" y="45" text-anchor="middle" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">HIREFORGE — FAULT TOLERANCE &amp; CRASH RECOVERY</text>
+  <text x="600" y="72" text-anchor="middle" font-size="13" fill="#94a3b8">SQS Visibility Heartbeat &bull; Atomic MongoDB Claim &bull; Stale Job Reaping &bull; Dead-Letter Queue (DLQ)</text>
+
+  <!-- Scenario 1: Worker Normal Execution with Heartbeat -->
+  <g transform="translate(60, 110)" filter="url(#shadow2)">
+    <rect width="520" height="340" rx="14" fill="#0f172a" stroke="#0ea5e9" stroke-width="1.5" />
+    <rect width="520" height="38" rx="14" fill="#1e293b" />
+    <text x="260" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#38bdf8">1. Long-Running Job &amp; Heartbeat Extension (Normal Path)</text>
+
+    <!-- Steps -->
+    <rect x="20" y="55" width="480" height="50" rx="8" fill="#1e293b" />
+    <text x="35" y="76" font-size="11" font-weight="700" fill="#f8fafc">A. Worker claims message from SQS</text>
+    <text x="35" y="94" font-size="10" fill="#94a3b8">SQS hides message for VisibilityTimeout (300 seconds)</text>
+
+    <rect x="20" y="115" width="480" height="60" rx="8" fill="#132338" stroke="#0284c7" stroke-width="1" />
+    <text x="35" y="136" font-size="11" font-weight="700" fill="#38bdf8">B. Daemon Heartbeat Thread starts (worker.py)</text>
+    <text x="35" y="152" font-size="10" fill="#cbd5e1">&bull; Runs every 60s: sqs.change_message_visibility(VisibilityTimeout=300)</text>
+    <text x="35" y="167" font-size="10" fill="#cbd5e1">&bull; Updates MongoDB: processingHeartbeatAt = new Date()</text>
+
+    <rect x="20" y="185" width="480" height="65" rx="8" fill="#1e293b" />
+    <text x="35" y="206" font-size="11" font-weight="700" fill="#f8fafc">C. LangGraph + LaTeX compilation finishes</text>
+    <text x="35" y="224" font-size="10" fill="#94a3b8">Heartbeat thread safely stops via stop_heartbeat.set()</text>
+    <text x="35" y="239" font-size="10" fill="#10b981">Worker invokes sqs.delete_message() ➔ Queue acknowledged clean</text>
+
+    <rect x="20" y="260" width="480" height="65" rx="8" fill="#042f2e" stroke="#10b981" stroke-width="1" />
+    <text x="260" y="284" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399">RESULT: Job Never Expires Prematurely</text>
+    <text x="260" y="304" text-anchor="middle" font-size="10" fill="#a7f3d0">Jobs taking 4-6 minutes are protected from being stolen by other workers</text>
+  </g>
+
+  <!-- Scenario 2: Worker Sudden Crash Mid-Job -->
+  <g transform="translate(620, 110)" filter="url(#shadow2)">
+    <rect width="520" height="340" rx="14" fill="#0f172a" stroke="#ef4444" stroke-width="1.5" />
+    <rect width="520" height="38" rx="14" fill="#1e293b" />
+    <text x="260" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#f87171">2. Worker Dies Mid-Job (Crash Recovery)</text>
+
+    <rect x="20" y="55" width="480" height="50" rx="8" fill="#2d1515" stroke="#dc2626" stroke-width="1" />
+    <text x="35" y="76" font-size="11" font-weight="700" fill="#fca5a5">A. Worker 1 crashes (OOM, container kill, power cut)</text>
+    <text x="35" y="94" font-size="10" fill="#fecaca">Worker 1 never calls delete_message and heartbeat thread terminates</text>
+
+    <rect x="20" y="115" width="480" height="60" rx="8" fill="#1e293b" />
+    <text x="35" y="136" font-size="11" font-weight="700" fill="#f8fafc">B. SQS Visibility Timeout (300s) elapses</text>
+    <text x="35" y="152" font-size="10" fill="#94a3b8">Without heartbeat renewals, SQS automatically makes the message visible</text>
+    <text x="35" y="167" font-size="10" fill="#94a3b8">Worker 2 polls SQS and receives the exact same { jobId }</text>
+
+    <rect x="20" y="185" width="480" height="75" rx="8" fill="#1a1c2e" stroke="#6366f1" stroke-width="1" />
+    <text x="35" y="206" font-size="11" font-weight="700" fill="#a5b4fc">C. Stale Job Reaping (job_lifecycle.py)</text>
+    <text x="35" y="223" font-size="10" fill="#c7d2fe">Worker 2 checks: processingHeartbeatAt &lt; now - 600 seconds</text>
+    <text x="35" y="238" font-size="10" fill="#c7d2fe">Finds heartbeat stale ➔ Worker 2 atomically reclaims the job</text>
+    <text x="35" y="252" font-size="10" fill="#10b981">Restarts processing cleanly from scratch without human intervention!</text>
+
+    <rect x="20" y="270" width="480" height="55" rx="8" fill="#042f2e" stroke="#10b981" stroke-width="1" />
+    <text x="260" y="292" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399">RESULT: Zero Orphaned Jobs &bull; Self-Healing</text>
+    <text x="260" y="310" text-anchor="middle" font-size="10" fill="#a7f3d0">Work is recovered automatically without manual database fixes</text>
+  </g>
+
+  <!-- Scenario 3: At-Least-Once Delivery Race Condition -->
+  <g transform="translate(60, 480)" filter="url(#shadow2)">
+    <rect width="520" height="370" rx="14" fill="#0f172a" stroke="#a855f7" stroke-width="1.5" />
+    <rect width="520" height="38" rx="14" fill="#1e293b" />
+    <text x="260" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#c084fc">3. Duplicate SQS Delivery (At-Least-Once Race)</text>
+
+    <rect x="20" y="55" width="480" height="55" rx="8" fill="#1e293b" />
+    <text x="35" y="75" font-size="11" font-weight="700" fill="#f8fafc">A. SQS delivers Job #123 to Worker A AND Worker B</text>
+    <text x="35" y="93" font-size="10" fill="#94a3b8">Standard SQS queues guarantee at-least-once delivery (rare duplicates)</text>
+
+    <rect x="20" y="120" width="480" height="135" rx="8" fill="#181329" stroke="#9333ea" stroke-width="1" />
+    <text x="35" y="142" font-size="11" font-weight="700" fill="#e879f9">B. Atomic Compare-and-Swap in MongoDB (claim_job)</text>
+    <text x="35" y="160" font-size="10" font-family="monospace" fill="#f5d0fe">jobs.find_one_and_update(</text>
+    <text x="50" y="175" font-size="10" font-family="monospace" fill="#f5d0fe">  {"_id": jobId, "status": "queued"},</text>
+    <text x="50" y="190" font-size="10" font-family="monospace" fill="#f5d0fe">  {"$set": {"status": "processing", ...}}</text>
+    <text x="35" y="205" font-size="10" font-family="monospace" fill="#f5d0fe">)</text>
+    <text x="35" y="225" font-size="10" fill="#a7f3d0">&bull; Worker A arrives 1st: Matches filter ➔ Status becomes 'processing'</text>
+    <text x="35" y="242" font-size="10" fill="#f87171">&bull; Worker B arrives 2nd: Filter NO LONGER matches ➔ Returns None</text>
+
+    <rect x="20" y="265" width="480" height="90" rx="8" fill="#042f2e" stroke="#10b981" stroke-width="1" />
+    <text x="260" y="290" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399">RESULT: Guaranteed Idempotency</text>
+    <text x="260" y="310" text-anchor="middle" font-size="10" fill="#a7f3d0">Worker B sees job is already claimed and drops the message</text>
+    <text x="260" y="328" text-anchor="middle" font-size="10" fill="#a7f3d0">Zero double-billing &bull; Zero duplicated Groq LLM token waste</text>
+  </g>
+
+  <!-- Scenario 4: Poison Pill Corrupted PDF & DLQ -->
+  <g transform="translate(620, 480)" filter="url(#shadow2)">
+    <rect width="520" height="370" rx="14" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
+    <rect width="520" height="38" rx="14" fill="#1e293b" />
+    <text x="260" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#fbbf24">4. Poison Pill (Corrupted File) &amp; Dead-Letter Queue</text>
+
+    <rect x="20" y="55" width="480" height="55" rx="8" fill="#2d1b10" stroke="#b45309" stroke-width="1" />
+    <text x="35" y="75" font-size="11" font-weight="700" fill="#fde68a">A. Corrupted PDF crashes PyMuPDF with segmentation fault</text>
+    <text x="35" y="93" font-size="10" fill="#fef3c7">Crash happens every single time the file is parsed</text>
+
+    <rect x="20" y="120" width="480" height="70" rx="8" fill="#1e293b" />
+    <text x="35" y="142" font-size="11" font-weight="700" fill="#f8fafc">B. SQS Redrive Policy: maxReceiveCount = 3</text>
+    <text x="35" y="160" font-size="10" fill="#94a3b8">&bull; Attempt 1 fails ➔ retried</text>
+    <text x="35" y="176" font-size="10" fill="#94a3b8">&bull; Attempt 2 fails ➔ retried</text>
+    <text x="35" y="192" font-size="10" fill="#f87171">&bull; Attempt 3 fails ➔ SQS intercepts message!</text>
+
+    <rect x="20" y="200" width="480" height="60" rx="8" fill="#261214" stroke="#e11d48" stroke-width="1" />
+    <text x="35" y="222" font-size="11" font-weight="700" fill="#fda4af">C. Message moved to DLQ (hireforge-jobs-dlq)</text>
+    <text x="35" y="240" font-size="10" fill="#fecdd3">Message is isolated from the main queue &bull; CloudWatch alarm fires</text>
+
+    <rect x="20" y="270" width="480" height="85" rx="8" fill="#042f2e" stroke="#10b981" stroke-width="1" />
+    <text x="260" y="295" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399">RESULT: Circuit Breaker &amp; Fleet Protection</text>
+    <text x="260" y="315" text-anchor="middle" font-size="10" fill="#a7f3d0">Workers are not trapped in infinite retry death loops</text>
+    <text x="260" y="333" text-anchor="middle" font-size="10" fill="#a7f3d0">Healthy jobs continue processing without interruption</text>
+  </g>
+</svg>
