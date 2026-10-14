@@ -60,7 +60,7 @@
 
   <!-- Title Header -->
   <text x="700" y="50" text-anchor="middle" font-size="28" font-weight="800" fill="#f8fafc" letter-spacing="1">HIREFORGE — END-TO-END SYSTEM ARCHITECTURE</text>
-  <text x="700" y="80" text-anchor="middle" font-size="14" fill="#94a3b8">Decoupled Asynchronous Microservices &bull; Event-Driven SQS &bull; Autonomous LangGraph Agent &bull; LaTeX PDF</text>
+  <text x="700" y="80" text-anchor="middle" font-size="14" fill="#94a3b8">Decoupled Asynchronous Microservices &#8226; Event-Driven SQS &#8226; Autonomous LangGraph Agent &#8226; LaTeX PDF</text>
 
   <!-- ================= PHASE 1: CLIENT TIER ================= -->
   <g transform="translate(60, 130)" filter="url(#shadow)">
@@ -73,20 +73,20 @@
 
     <!-- Content -->
     <text x="20" y="70" font-size="13" font-weight="600" fill="#f1f5f9">React 18 + Vite SPA</text>
-    <text x="20" y="92" font-size="12" fill="#94a3b8">&bull; UploadForm.jsx (PDF + JD)</text>
-    <text x="20" y="112" font-size="12" fill="#94a3b8">&bull; ResultsPanel.jsx (Visualizer)</text>
-    <text x="20" y="132" font-size="12" fill="#94a3b8">&bull; ScoreRing &amp; Heatmap</text>
+    <text x="20" y="92" font-size="12" fill="#94a3b8">&#8226; UploadForm.jsx (PDF + JD)</text>
+    <text x="20" y="112" font-size="12" fill="#94a3b8">&#8226; ResultsPanel.jsx (Visualizer)</text>
+    <text x="20" y="132" font-size="12" fill="#94a3b8">&#8226; ScoreRing &amp; Heatmap</text>
 
     <line x1="20" y1="150" x2="230" y2="150" stroke="#334155" stroke-dasharray="4" />
 
     <text x="20" y="175" font-size="13" font-weight="600" fill="#38bdf8">Realtime Listener</text>
-    <text x="20" y="195" font-size="12" fill="#94a3b8">&bull; WebSocket (/ws?jobId=...)</text>
-    <text x="20" y="215" font-size="12" fill="#94a3b8">&bull; Polling Fallback (every 3s)</text>
-    <text x="20" y="235" font-size="12" fill="#10b981">&bull; High-resilience dual-channel</text>
+    <text x="20" y="195" font-size="12" fill="#94a3b8">&#8226; WebSocket (/ws?jobId=...)</text>
+    <text x="20" y="215" font-size="12" fill="#94a3b8">&#8226; Polling Fallback (every 3s)</text>
+    <text x="20" y="235" font-size="12" fill="#10b981">&#8226; High-resilience dual-channel</text>
 
     <rect x="20" y="265" width="210" height="50" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="1" />
     <text x="125" y="286" text-anchor="middle" font-size="11" font-weight="600" fill="#38bdf8">ACTION: POST /api/upload</text>
-    <text x="125" y="303" text-anchor="middle" font-size="10" fill="#94a3b8">Multipart Form &bull; Bearer JWT</text>
+    <text x="125" y="303" text-anchor="middle" font-size="10" fill="#94a3b8">Multipart Form &#8226; Bearer JWT</text>
   </g>
 
   <!-- Arrow 1: Frontend -> Backend -->
@@ -100,9 +100,9 @@
     <text x="135" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#4ade80">2. Express Backend</text>
 
     <text x="20" y="70" font-size="13" font-weight="600" fill="#f1f5f9">Validation &amp; Ingestion</text>
-    <text x="20" y="90" font-size="12" fill="#94a3b8">&bull; Multer memory buffer (5MB)</text>
-    <text x="20" y="110" font-size="12" fill="#facc15">&bull; Magic Bytes Check: %PDF-</text>
-    <text x="20" y="130" font-size="12" fill="#94a3b8">&bull; JWT Middleware verify</text>
+    <text x="20" y="90" font-size="12" fill="#94a3b8">&#8226; Multer memory buffer (5MB)</text>
+    <text x="20" y="110" font-size="12" fill="#facc15">&#8226; Magic Bytes Check: %PDF-</text>
+    <text x="20" y="130" font-size="12" fill="#94a3b8">&#8226; JWT Middleware verify</text>
 
     <line x1="20" y1="145" x2="250" y2="145" stroke="#334155" stroke-dasharray="4" />
 
@@ -135,8 +135,8 @@
   <g transform="translate(770, 140)" filter="url(#shadow)">
     <rect width="210" height="120" rx="12" fill="#132338" stroke="#0284c7" stroke-width="1.5" />
     <text x="105" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#38bdf8">AWS S3 (Private Bucket)</text>
-    <text x="15" y="55" font-size="11" fill="#cbd5e1">&bull; resumes/{userId}/{jobId}.pdf</text>
-    <text x="15" y="75" font-size="11" fill="#cbd5e1">&bull; generated-resumes/{uid}/{jid}.pdf</text>
+    <text x="15" y="55" font-size="11" fill="#cbd5e1">&#8226; resumes/{userId}/{jobId}.pdf</text>
+    <text x="15" y="75" font-size="11" fill="#cbd5e1">&#8226; generated-resumes/{uid}/{jid}.pdf</text>
     <rect x="15" y="88" width="180" height="20" rx="4" fill="#082f49" />
     <text x="105" y="102" text-anchor="middle" font-size="9" fill="#38bdf8">Pre-Signed URLs (1h TTL)</text>
   </g>
@@ -145,9 +145,9 @@
   <g transform="translate(770, 310)" filter="url(#shadow)">
     <rect width="210" height="130" rx="12" fill="#201538" stroke="#9333ea" stroke-width="1.5" />
     <text x="105" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#c084fc">AWS SQS Queue</text>
-    <text x="15" y="55" font-size="11" fill="#e9d5ff">&bull; Body: { jobId: "uuid" }</text>
-    <text x="15" y="75" font-size="11" fill="#e9d5ff">&bull; VisibilityTimeout: 300s</text>
-    <text x="15" y="95" font-size="11" fill="#e9d5ff">&bull; Dead-Letter Queue (DLQ)</text>
+    <text x="15" y="55" font-size="11" fill="#e9d5ff">&#8226; Body: { jobId: "uuid" }</text>
+    <text x="15" y="75" font-size="11" fill="#e9d5ff">&#8226; VisibilityTimeout: 300s</text>
+    <text x="15" y="95" font-size="11" fill="#e9d5ff">&#8226; Dead-Letter Queue (DLQ)</text>
     <text x="15" y="115" font-size="9" fill="#a855f7">Decoupled Asynchronous Buffer</text>
   </g>
 
@@ -155,10 +155,10 @@
   <g transform="translate(400, 550)" filter="url(#shadow)">
     <rect width="270" height="150" rx="12" fill="#0f261e" stroke="#059669" stroke-width="1.5" />
     <text x="135" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#34d399">MongoDB Database</text>
-    <text x="15" y="55" font-size="11" fill="#a7f3d0">&bull; UUID _id (Pre-generated)</text>
-    <text x="15" y="75" font-size="11" fill="#a7f3d0">&bull; Compound index: { userId: 1, createdAt: -1 }</text>
-    <text x="15" y="95" font-size="11" fill="#a7f3d0">&bull; Atomic find_one_and_update</text>
-    <text x="15" y="115" font-size="11" fill="#a7f3d0">&bull; processingHeartbeatAt field</text>
+    <text x="15" y="55" font-size="11" fill="#a7f3d0">&#8226; UUID _id (Pre-generated)</text>
+    <text x="15" y="75" font-size="11" fill="#a7f3d0">&#8226; Compound index: { userId: 1, createdAt: -1 }</text>
+    <text x="15" y="95" font-size="11" fill="#a7f3d0">&#8226; Atomic find_one_and_update</text>
+    <text x="15" y="115" font-size="11" fill="#a7f3d0">&#8226; processingHeartbeatAt field</text>
     <text x="15" y="135" font-size="9" fill="#6ee7b7">Guarantees idempotency &amp; crash recovery</text>
   </g>
 
@@ -175,13 +175,13 @@
     <!-- Worker Step 1: Claim -->
     <rect x="15" y="60" width="260" height="55" rx="8" fill="#0f172a" stroke="#64748b" stroke-width="1" />
     <text x="25" y="80" font-size="11" font-weight="700" fill="#f8fafc">A. Atomic Job Claim &amp; Heartbeat</text>
-    <text x="25" y="98" font-size="10" fill="#94a3b8">&bull; find_one_and_update(status: queued)</text>
-    <text x="25" y="110" font-size="9" fill="#10b981">&bull; Daemon thread: visibility renew every 60s</text>
+    <text x="25" y="98" font-size="10" fill="#94a3b8">&#8226; find_one_and_update(status: queued)</text>
+    <text x="25" y="110" font-size="9" fill="#10b981">&#8226; Daemon thread: visibility renew every 60s</text>
 
     <!-- Worker Step 2: PyMuPDF -->
     <rect x="15" y="125" width="260" height="45" rx="8" fill="#0f172a" stroke="#64748b" stroke-width="1" />
     <text x="25" y="145" font-size="11" font-weight="700" fill="#f8fafc">B. PyMuPDF (fitz) Extraction</text>
-    <text x="25" y="160" font-size="10" fill="#94a3b8">&bull; Pulls S3 buffer ➔ extracts raw text</text>
+    <text x="25" y="160" font-size="10" fill="#94a3b8">&#8226; Pulls S3 buffer ➔ extracts raw text</text>
 
     <!-- LangGraph Box -->
     <rect x="15" y="180" width="260" height="310" rx="10" fill="#181329" stroke="#8b5cf6" stroke-width="1.5" />
@@ -211,21 +211,21 @@
     <!-- Node 5: Verify -->
     <rect x="25" y="365" width="240" height="45" rx="6" fill="#241b3d" stroke="#a855f7" stroke-width="1" />
     <text x="145" y="382" text-anchor="middle" font-size="10" font-weight="600" fill="#e9d5ff">5. verify_score &amp; Feedback Loop</text>
-    <text x="145" y="396" text-anchor="middle" font-size="8" fill="#f43f5e">&bull; If score &lt; Target &amp; iter &lt; 3 ➔ Loop back</text>
-    <text x="145" y="406" text-anchor="middle" font-size="8" fill="#4ade80">&bull; If Target hit OR iter == 3 ➔ Finish</text>
+    <text x="145" y="396" text-anchor="middle" font-size="8" fill="#f43f5e">&#8226; If score &lt; Target &amp; iter &lt; 3 ➔ Loop back</text>
+    <text x="145" y="406" text-anchor="middle" font-size="8" fill="#4ade80">&#8226; If Target hit OR iter == 3 ➔ Finish</text>
 
     <!-- LaTeX PDF Compilation -->
     <rect x="15" y="500" width="260" height="95" rx="8" fill="#0f172a" stroke="#0ea5e9" stroke-width="1" />
     <text x="25" y="520" font-size="11" font-weight="700" fill="#38bdf8">C. LaTeX PDF Compilation</text>
-    <text x="25" y="538" font-size="10" fill="#cbd5e1">&bull; Sanitize TeX escape: &amp;, %, $, #</text>
-    <text x="25" y="555" font-size="10" fill="#cbd5e1">&bull; Runs pdflatex inside TeX Live container</text>
-    <text x="25" y="572" font-size="10" fill="#facc15">&bull; "Score What You Ship": Re-score real PDF</text>
-    <text x="25" y="587" font-size="9" fill="#38bdf8">&bull; Upload final PDF to S3</text>
+    <text x="25" y="538" font-size="10" fill="#cbd5e1">&#8226; Sanitize TeX escape: &amp;, %, $, #</text>
+    <text x="25" y="555" font-size="10" fill="#cbd5e1">&#8226; Runs pdflatex inside TeX Live container</text>
+    <text x="25" y="572" font-size="10" fill="#facc15">&#8226; "Score What You Ship": Re-score real PDF</text>
+    <text x="25" y="587" font-size="9" fill="#38bdf8">&#8226; Upload final PDF to S3</text>
 
     <!-- Completion / Done -->
     <rect x="15" y="605" width="260" height="60" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1" />
     <text x="145" y="625" text-anchor="middle" font-size="11" font-weight="700" fill="#a7f3d0">D. Finalize &amp; Ack</text>
-    <text x="145" y="642" text-anchor="middle" font-size="10" fill="#6ee7b7">MongoDB status: "done" &bull; SQS delete_message</text>
+    <text x="145" y="642" text-anchor="middle" font-size="10" fill="#6ee7b7">MongoDB status: "done" &#8226; SQS delete_message</text>
     <text x="145" y="656" text-anchor="middle" font-size="9" fill="#a7f3d0">Callback POST /api/internal/jobs/:id/progress</text>
   </g>
 

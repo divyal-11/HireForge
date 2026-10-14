@@ -38,7 +38,7 @@
 
   <!-- Header -->
   <text x="600" y="45" text-anchor="middle" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">HIREFORGE — LANGGRAPH AGENT STATE MACHINE</text>
-  <text x="600" y="72" text-anchor="middle" font-size="13" fill="#94a3b8">Cyclic State Transitions &bull; Conditional Branching &bull; Deterministic ATS Scorer &bull; Post-PDF Verification</text>
+  <text x="600" y="72" text-anchor="middle" font-size="13" fill="#94a3b8">Cyclic State Transitions &#8226; Conditional Branching &#8226; Deterministic ATS Scorer &#8226; Post-PDF Verification</text>
 
   <!-- Side Panel: AgentState Schema -->
   <g transform="translate(40, 110)" filter="url(#cardShadow)">
@@ -71,17 +71,17 @@
     <!-- State Explanation box -->
     <rect x="15" y="450" width="230" height="310" rx="10" fill="#1e1b4b" stroke="#4338ca" stroke-width="1" />
     <text x="130" y="475" text-anchor="middle" font-size="12" font-weight="700" fill="#a5b4fc">State Principles</text>
-    <text x="25" y="505" font-size="11" fill="#e0e7ff">&bull; Immutability:</text>
+    <text x="25" y="505" font-size="11" fill="#e0e7ff">&#8226; Immutability:</text>
     <text x="25" y="522" font-size="10" fill="#c7d2fe">Nodes return {**state, ...} updates</text>
-    <text x="25" y="550" font-size="11" fill="#e0e7ff">&bull; Zero Global State:</text>
+    <text x="25" y="550" font-size="11" fill="#e0e7ff">&#8226; Zero Global State:</text>
     <text x="25" y="567" font-size="10" fill="#c7d2fe">Each job run is fully isolated</text>
-    <text x="25" y="595" font-size="11" fill="#e0e7ff">&bull; Telemetry State:</text>
+    <text x="25" y="595" font-size="11" fill="#e0e7ff">&#8226; Telemetry State:</text>
     <text x="25" y="612" font-size="10" fill="#c7d2fe">progress[] accumulates logs</text>
     <text x="25" y="627" font-size="10" fill="#c7d2fe">pushed to WebSocket in real-time</text>
-    <text x="25" y="655" font-size="11" fill="#e0e7ff">&bull; Cycle Defense:</text>
+    <text x="25" y="655" font-size="11" fill="#e0e7ff">&#8226; Cycle Defense:</text>
     <text x="25" y="672" font-size="10" fill="#c7d2fe">iteration counter strictly caps</text>
     <text x="25" y="687" font-size="10" fill="#c7d2fe">rewrite passes to 3 iterations</text>
-    <text x="25" y="715" font-size="11" fill="#e0e7ff">&bull; Truthful Output:</text>
+    <text x="25" y="715" font-size="11" fill="#e0e7ff">&#8226; Truthful Output:</text>
     <text x="25" y="732" font-size="10" fill="#c7d2fe">Gaps never fabricated</text>
   </g>
 
@@ -111,9 +111,9 @@
   <g transform="translate(460, 310)" filter="url(#cardShadow)">
     <rect width="440" height="95" rx="12" fill="url(#nodeBlue)" stroke="#eab308" stroke-width="1.5" />
     <text x="220" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#facc15">NODE: ats_score (Deterministic Scorer)</text>
-    <text x="220" y="47" text-anchor="middle" font-size="11" fill="#e2e8f0">Score = (Req% &times; 60) + (Nice% &times; 20) + (Format% &times; 20)</text>
-    <text x="220" y="66" text-anchor="middle" font-size="10" fill="#94a3b8">&bull; Alias dictionary expansion: 'k8s' &harr; 'kubernetes', 'ts' &harr; 'typescript'</text>
-    <text x="220" y="82" text-anchor="middle" font-size="10" fill="#86efac">Zero LLM cost &bull; 100% deterministic &bull; Produces: ats_score, keyword_map, gaps</text>
+    <text x="220" y="47" text-anchor="middle" font-size="11" fill="#e2e8f0">Score = (Req% &#215; 60) + (Nice% &#215; 20) + (Format% &#215; 20)</text>
+    <text x="220" y="66" text-anchor="middle" font-size="10" fill="#94a3b8">&#8226; Alias dictionary expansion: 'k8s' &#8596; 'kubernetes', 'ts' &#8596; 'typescript'</text>
+    <text x="220" y="82" text-anchor="middle" font-size="10" fill="#86efac">Zero LLM cost &#8226; 100% deterministic &#8226; Produces: ats_score, keyword_map, gaps</text>
   </g>
 
   <!-- Arrow Score -> Decision -->
@@ -132,11 +132,11 @@
 
   <!-- Branch 2: 40 <= Score < Target -> rewrite_resume -->
   <path d="M 790, 485 L 920, 485 L 920, 545" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow)" />
-  <text x="865" y="475" text-anchor="middle" font-size="10" font-weight="700" fill="#c084fc">40 &le; Score &lt; Target</text>
+  <text x="865" y="475" text-anchor="middle" font-size="10" font-weight="700" fill="#c084fc">40 &#8804; Score &lt; Target</text>
 
   <!-- Branch 3: Score >= Target (Direct Bypass to Verify) -->
   <path d="M 680, 530 L 680, 680" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="5" marker-end="url(#arrowGreen)" />
-  <text x="705" y="605" font-size="10" font-weight="700" fill="#34d399">Score &ge; Target (Bypass)</text>
+  <text x="705" y="605" font-size="10" font-weight="700" fill="#34d399">Score &#8805; Target (Bypass)</text>
 
   <!-- Node 4: suggest_additions -->
   <g transform="translate(340, 550)" filter="url(#cardShadow)">
@@ -152,8 +152,8 @@
     <rect width="250" height="90" rx="10" fill="#241436" stroke="#c084fc" stroke-width="1.5" />
     <text x="125" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#e879f9">rewrite_resume</text>
     <text x="125" y="44" text-anchor="middle" font-size="10" fill="#f5d0fe">LLM Rewrite with constraints</text>
-    <text x="125" y="62" text-anchor="middle" font-size="9" fill="#fae8ff">&bull; Injects missing keywords naturally</text>
-    <text x="125" y="76" text-anchor="middle" font-size="9" fill="#fae8ff">&bull; Strong action verbs (Led, Architected)</text>
+    <text x="125" y="62" text-anchor="middle" font-size="9" fill="#fae8ff">&#8226; Injects missing keywords naturally</text>
+    <text x="125" y="76" text-anchor="middle" font-size="9" fill="#fae8ff">&#8226; Strong action verbs (Led, Architected)</text>
   </g>
 
   <!-- Both converge into Node 5: verify_score -->
